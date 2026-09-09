@@ -5,8 +5,12 @@ import Hero from './components/Hero'
 function App() {
   return (
     <>
-      <Navbar />
-      <Hero />
+      <div className='page'>
+        <div className='site-container'>
+          <Navbar />
+        </div>
+        <Hero />
+      </div>
     </>
   )
 }

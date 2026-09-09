@@ -3,8 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
+:root {
   font-family: Inter, system-ui, sans-serif;
   background: #ffffff;
   color: #111318;
+}
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #ffffff;
+}
+button,a {
+  font-family: inherit;
+}
+.site-container {
+  width: min(1200px, calc(100% - 48px));
+  margin: auto;
+}
+.page {
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(#e0e3e8 1px, transparent 1px),
+    linear-gradient(90deg, #e0e3e8 1px, transparent 1px);
+
+  background-size: 50px 50px;
 }

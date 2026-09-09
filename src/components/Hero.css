@@ -1,0 +1,55 @@
+.hero {
+    min-height: auto;
+    padding: 150px 24px 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-kicker {
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #667085;
+    margin-top: 20px;
+}
+
+.hero h1 {
+    max-width: 900px;
+    font-size: clamp(48px, 7vm, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    font-weight: 700;
+}
+
+.hero-description {
+    max-width: 620px;
+    margin-top: 28px;
+
+    color: #667085;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.hero-button {
+    margin-top: 36px;
+    padding: 14px 22px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #3157ff;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.hero-button:hover {
+    background: #2447df;
+}

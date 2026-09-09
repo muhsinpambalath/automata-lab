@@ -1,0 +1,44 @@
+.navbar {
+  width: min(1200px, calc(100% - 48px));
+  height: 68px;
+  margin: 0 auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 18px;
+
+  padding: 0 24px;
+
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+
+  box-shadow: 0 4px 20px rgba(17, 19, 24, 0.05);
+}
+
+.logo {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #2b51fd;
+    font-size: 24px;
+}
+.nav-links {
+    display: flex;
+    gap: 34px;
+}
+
+.nav-links a {
+    color: #667085;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #111318;
+}

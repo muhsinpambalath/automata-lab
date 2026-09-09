@@ -1,16 +1,22 @@
+import './Hero.css'
+import InteractivePreview from './InteractivePreview'
+
 function Hero() {
     return (
-        <section>
-            <p>INTERACTIVE COMPUTING LAB</p>
+        <section className='hero'>
+            <p className='hero-kicker'>INTERACTIVE COMPUTING LAB</p>
 
             <h1>Build it. Run it. Understand it.</h1>
 
-            <p>
+            <p className='hero-description'>
                 Explore core computer science through interactive models.
-                Build, simulate, and visualize algorithms, data structures, and systems
+                Build, simulate, and visualize algorithms, data structures, and systems.
             </p>
 
-            <button>Enter the Lab</button>
+            <button className='hero-button'>Enter the Lab</button>
+
+            <InteractivePreview />
+
         </section>
     )
 }
