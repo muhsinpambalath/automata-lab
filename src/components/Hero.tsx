@@ -1,7 +1,12 @@
 import './Hero.css'
 import InteractivePreview from './InteractivePreview'
+import { useNavigate } from 'react-router-dom'
+
 
 function Hero() {
+
+    const navigate = useNavigate()
+
     return (
         <section className='hero'>
             <p className='hero-kicker'>INTERACTIVE COMPUTING LAB</p>
@@ -13,7 +18,12 @@ function Hero() {
                 Build, simulate, and visualize algorithms, data structures, and systems.
             </p>
 
-            <button className='hero-button'>Enter the Lab</button>
+            <button 
+                className='hero-button'
+                onClick={() => navigate('/lab')}
+            >
+                Enter the Lab
+            </button>
 
             <InteractivePreview />
 
