@@ -1,9 +1,10 @@
 import './Navbar.css'
+import logo from '../assets/Logo.svg'
 
 function Navbar() {
     return (
         <nav className="navbar">
-            <div className="logo"><span>L</span>ogic<span>F</span>orge</div>
+            <div className="logo"><img src={logo} alt="LogicForge" /></div>
 
             <div className="nav-links">
                 <a href="#labs">Labs</a>

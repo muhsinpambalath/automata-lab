@@ -19,14 +19,14 @@
 }
 
 .logo {
-    font-family: 'Courier New', monospace;
-    font-size: 20px;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 
-.logo span {
-    color: #2b51fd;
-    font-size: 24px;
+.logo img {
+    width: 185px;
+    height: auto;
+    display: block;
 }
 .nav-links {
     display: flex;
