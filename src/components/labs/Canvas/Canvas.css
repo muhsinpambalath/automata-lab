@@ -130,7 +130,6 @@
     cursor: not-allowed;
 }
 
-.tool-connect .state-node,
 .tool-start .state-node,
 .tool-accept .state-node {
     cursor: crosshair;
@@ -138,6 +137,14 @@
 
 .tool-delete .state-node {
     cursor: not-allowed;
+}
+
+.tool-connect {
+    cursor: default;
+}
+
+.tool-connect .state-node {
+    cursor: url('../../../assets/cursors/connect-cursor.svg') 5 5, pointer;
 }
 
 .canvas-area {
@@ -159,4 +166,128 @@
     font-family: "Courier New", monospace;
     font-size: 14px;
     color: #111318;
+}
+
+.connecting-source {
+    border-color: #3157ff;
+    animation: connectPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes connectPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px rgba(49, 87, 255, 0.12);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(49, 87, 255, 0.28);
+    }
+}
+
+.connection-label {
+    position: absolute;
+    bottom: -22px;
+
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: #3157ff;
+}
+
+.transition-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 14px;
+
+    background: #ffffff;
+    border: 1px solid #dfe3e8;
+    border-radius: 8px;
+
+    box-shadow: 0 10px 30px rgba(17, 19, 24, 0.12);
+
+    z-index: 20;
+}
+
+.transition-popup span {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #667085;
+}
+
+.transition-popup input {
+    width: 80px;
+    padding: 7px 8px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 5px;
+
+    outline: none;
+
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+}
+
+.transition-popup input:focus {
+    border-color: #3157ff;
+    box-shadow: 0 0 0 3px #eef2ff;
+}
+
+.transition-popup button {
+    padding: 7px 11px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 5px;
+
+    background: #ffffff;
+    color: #111318;
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.transition-popup button:first-of-type {
+    background: #3157ff;
+    border-color: #3157ff;
+    color: #ffffff;
+}
+
+.transition-popup button:hover {
+    border-color: #3157ff;
+}
+
+.transition-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.transition-line {
+    stroke: #111318;
+    stroke-width: 2;
+    fill: none;
+}
+
+.transition-label {
+    fill: #111318;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    user-select: none;
+}
+
+.transition-error {
+    margin: 6px 0 0;
+    color: #d92d20;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
 }

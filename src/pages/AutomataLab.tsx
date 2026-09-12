@@ -1,9 +1,14 @@
+import { useState } from 'react'
+import type { AutomatonType } from '../models/automaton'
 import './AutomataLab.css'
 import Canvas from '../components/labs/Canvas/Canvas'
 
 
 
 function AutomataLab() {
+
+    const [automatonType, setAutomatonType] = useState<AutomatonType>('DFA')
+
     return (
         <main className='lab-page'>
             <header className='lab-header'>
@@ -12,13 +17,22 @@ function AutomataLab() {
                     <h1>Build your machine.</h1>
                 </div>
 
-                <span className='lab-status'>DFA</span>
+                <select
+                    className="machine-selector"
+                    value={automatonType}
+                    onChange={(event) =>
+                        setAutomatonType(event.target.value as AutomatonType)
+                    }
+                >
+                    <option value="DFA">DFA</option>
+                    <option value="NFA">NFA</option>
+                </select>
 
             </header>
 
             <section className='lab-workspace'>
                 <div className='lab-canvas'>
-                    <Canvas />
+                    <Canvas automatonType = {automatonType} />
                 </div>
 
                 <aside className='lab-controls'>
