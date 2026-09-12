@@ -1,0 +1,149 @@
+.canvas-toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-bottom: 16px;
+}
+
+.tool-button {
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 7px;
+
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.tool-button img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.tool-button.active {
+    border-color: #3157ff;
+    background: #eef2ff;
+}
+
+.tool-button:hover {
+    border-color: #3157ff;
+    background: #f5f7ff;
+}
+
+.tool-button::after {
+    content: attr(data-tooltip);
+
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+
+    padding: 6px 9px;
+
+    white-space: nowrap;
+
+    background: #111318;
+    color: #ffffff;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 20;
+}
+
+.tool-button:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.canvas-area {
+    flex: 1;
+    min-height: 420px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    border: 1px dashed rgba(17, 19, 24, 0.18);
+    border-radius: 10px;
+
+    color: #98a2b3;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.state-node {
+    position: absolute;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #111318;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+
+    transform: translate(-50%, -50%);
+
+    user-select: none;
+    cursor: grab;
+}
+
+.state-node.selected {
+    border-color: #3157ff;
+    box-shadow: 0 0 0 3px #eef2ff;
+}
+
+.tool-select .state-node {
+    cursor: grab;
+}
+
+.tool-select .state-node:active {
+    cursor: grabbing;
+}
+
+.tool-add .state-node {
+    cursor: not-allowed;
+}
+
+.tool-connect .state-node,
+.tool-start .state-node,
+.tool-accept .state-node {
+    cursor: crosshair;
+}
+
+.tool-delete .state-node {
+    cursor: not-allowed;
+}
+
+.canvas-area {
+    cursor: default;
+}
+
+.canvas-area.tool-add {
+    cursor: crosshair;
+}
