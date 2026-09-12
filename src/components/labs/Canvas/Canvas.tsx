@@ -17,6 +17,7 @@ function Canvas() {
     const [states, setStates] = useState<State[]>([])
     const [draggingState, setDraggingState] = useState<string | null>(null)
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+    const [editingState, setEditingState] = useState<string | null>(null)
 
     const addState = (x: number, y: number) => {
         const tooClose = states.some((state) => {
@@ -46,6 +47,22 @@ function Canvas() {
         if (activeTool !== 'select') return
 
         setSelectedState(stateId)
+    }
+
+    const renameState = (stateId: string, newLabel: string) => {
+        const label = newLabel.trim()
+
+        if (!label) return
+
+        setStates((currentStates) =>
+            currentStates.map((state) =>
+                state.id === stateId
+                    ? { ...state, label }
+                    : state
+            )
+        )
+
+        setEditingState(null)
     }
 
     return (
@@ -133,6 +150,14 @@ function Canvas() {
                             event.stopPropagation()
                             selectState(state.id)
                         }}
+                        onContextMenu={(event) => {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            if (activeTool === 'select') {
+                                setEditingState(state.id)
+                            }
+                        }}
                         onPointerDown={(event) => {
                             if (activeTool !== 'select') return
 
@@ -213,7 +238,35 @@ function Canvas() {
                             setDraggingState(null)
                         }}
                     >
-                        {state.label}
+                        {editingState === state.id ? (
+                            <input
+                                autoFocus
+                                defaultValue={state.label}
+                                className="state-name-input"
+                                onClick={(event) => event.stopPropagation()}
+                                onPointerDown={(event) => event.stopPropagation()}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        renameState(
+                                            state.id,
+                                            event.currentTarget.value
+                                        )
+                                    }
+
+                                    if (event.key === 'Escape') {
+                                        setEditingState(null)
+                                    }
+                                }}
+                                onBlur={(event) => {
+                                    renameState(
+                                        state.id,
+                                        event.currentTarget.value
+                                    )
+                                }}
+                            />
+                        ) : (
+                            state.label
+                        )}
                     </div>
                 ))}
             </div>
