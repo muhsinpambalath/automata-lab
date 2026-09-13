@@ -118,6 +118,27 @@
     box-shadow: 0 0 0 3px #eef2ff;
 }
 
+.accept-state {
+    box-shadow: inset 0 0 0 4px #ffffff;
+}
+
+.accept-state::after {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    border: 2px solid #111318;
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
 .tool-select .state-node {
     cursor: grab;
 }
@@ -182,6 +203,21 @@
     50% {
         box-shadow: 0 0 0 5px rgba(49, 87, 255, 0.28);
     }
+}
+
+.start-arrow {
+    position: absolute;
+    top: -8px;
+    left: -22px;
+
+    font-family: "Courier New", monospace;
+    font-size: 38px;
+    font-weight: 900;
+    color: #111318;
+
+    transform: rotate(20deg);
+
+    line-height: 1;
 }
 
 .connection-label {

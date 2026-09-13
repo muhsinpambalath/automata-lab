@@ -136,7 +136,7 @@ function Canvas({ automatonType }: CanvasProps) {
         }
     >()
 
-    transitions.forEach((transition, transitionIndex) => {
+    transitions.forEach((transition) => {
         const fromState = states.find(
             (state) => state.id === transition.from
         )
@@ -631,6 +631,7 @@ function Canvas({ automatonType }: CanvasProps) {
                         className={`state-node 
                             ${selectedState === state.id ? 'selected' : ''}
                             ${connectingFrom === state.id ? 'connecting-source' : ''}
+                            ${state.isAccept ? 'accept-state' : ''}
                         `}
                         style={{
                             left: state.x,
@@ -650,6 +651,34 @@ function Canvas({ automatonType }: CanvasProps) {
                                 } else {
                                     setConnectionTarget(state.id)
                                 }
+                            }
+
+                            if (activeTool === 'start') {
+                                setStates((currentStates) =>
+                                    currentStates.map((currentState) => ({
+                                        ...currentState,
+                                        isStart: currentState.id === state.id,
+                                    }))
+                                )
+
+                                setActiveTool('select')
+                                return
+                            }
+
+                            if (activeTool === 'accept') {
+                                setStates((currentStates) =>
+                                    currentStates.map((currentState) =>
+                                        currentState.id === state.id
+                                            ? {
+                                                ...currentState,
+                                                isAccept: !currentState.isAccept,
+                                            }
+                                            : currentState
+                                    )
+                                )
+
+                                setActiveTool('select')
+                                return
                             }
                         }}
                         onContextMenu={(event) => {
@@ -740,9 +769,15 @@ function Canvas({ automatonType }: CanvasProps) {
                             setDraggingState(null)
                         }}
                     >
+                    
+                        {state.isStart && (
+                            <span className="start-arrow">→</span>
+                        )}
+
                         {connectingFrom === state.id && (
                             <span className="connection-label">SOURCE</span>
                         )}
+
                         {editingState === state.id ? (
                             <input
                                 autoFocus
