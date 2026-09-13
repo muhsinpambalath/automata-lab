@@ -125,6 +125,8 @@ function Canvas({ automatonType }: CanvasProps) {
     const [connectionTarget, setConnectionTarget] = useState<string | null>(null)
     const [transitionSymbols, setTransitionSymbols] = useState('')
     const [transitionError, setTransitionError] = useState('')
+    const [editingTransition, setEditingTransition] = useState<string | null>(null)
+    const [transitionEditSymbols, setTransitionEditSymbols] = useState('')
 
 
     const transitionRoutes = new Map<
@@ -480,6 +482,56 @@ function Canvas({ automatonType }: CanvasProps) {
         setEditingState(null)
     }
 
+    const editTransition = () => {
+        if (!editingTransition) return
+
+        const symbols = transitionEditSymbols
+            .split(',')
+            .map((symbol) => symbol.trim())
+            .filter(Boolean)
+
+        if (symbols.length === 0) return
+
+        if (automatonType === 'DFA') {
+            const currentTransition = transitions.find(
+                (transition) => transition.id === editingTransition
+            )
+
+            if (!currentTransition) return
+
+            const conflictingSymbols = symbols.filter((symbol) =>
+                transitions.some(
+                    (transition) =>
+                        transition.id !== editingTransition &&
+                        transition.from === currentTransition.from &&
+                        transition.symbols.includes(symbol)
+                )
+            )
+
+            if (conflictingSymbols.length > 0) {
+                setTransitionError(
+                    `DFA conflict: ${conflictingSymbols.join(', ')} already used from this state.`
+                )
+                return
+            }
+        }
+
+        setTransitions((currentTransitions) =>
+            currentTransitions.map((transition) =>
+                transition.id === editingTransition
+                    ? {
+                        ...transition,
+                        symbols,
+                    }
+                    : transition
+            )
+        )
+
+        setEditingTransition(null)
+        setTransitionEditSymbols('')
+        setTransitionError('')
+    }
+
     return (
         <div className="canvas">
             <div className="canvas-toolbar">
@@ -613,9 +665,23 @@ function Canvas({ automatonType }: CanvasProps) {
                                     y={labelY - 8}
                                     className="transition-label"
                                     textAnchor="middle"
+                                    style={{ pointerEvents: 'auto', cursor: 'context-menu' }}
+                                    onContextMenu={(event) => {
+                                        event.preventDefault()
+                                        event.stopPropagation()
+
+                                        if (activeTool !== 'select') return
+
+                                        setEditingTransition(transition.id)
+                                        setTransitionEditSymbols(
+                                            transition.symbols.join(', ')
+                                        )
+                                        setTransitionError('')
+                                    }}
                                 >
                                     {transition.symbols.join(',')}
                                 </text>
+
                             </g>
                         )
                     })}
@@ -769,7 +835,7 @@ function Canvas({ automatonType }: CanvasProps) {
                             setDraggingState(null)
                         }}
                     >
-                    
+
                         {state.isStart && (
                             <span className="start-arrow">→</span>
                         )}
@@ -809,6 +875,53 @@ function Canvas({ automatonType }: CanvasProps) {
                         )}
                     </div>
                 ))}
+
+                {editingTransition && (
+                    <div className="transition-popup">
+                        <span>SYMBOLS</span>
+
+                        <input
+                            type="text"
+                            value={transitionEditSymbols}
+                            onChange={(event) =>
+                                setTransitionEditSymbols(event.target.value)
+                            }
+                            onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                    editTransition()
+                                }
+
+                                if (event.key === 'Escape') {
+                                    setEditingTransition(null)
+                                    setTransitionEditSymbols('')
+                                    setTransitionError('')
+                                }
+                            }}
+                            autoFocus
+                        />
+
+                        {transitionError && (
+                            <p className="transition-error">
+                                {transitionError}
+                            </p>
+                        )}
+
+                        <button onClick={editTransition}>
+                            Save
+                        </button>
+
+                        <button
+                            onClick={() => {
+                                setEditingTransition(null)
+                                setTransitionEditSymbols('')
+                                setTransitionError('')
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
+
                 {connectingFrom && connectionTarget && (
                     <div className="transition-popup">
                         <span>SYMBOLS</span>
