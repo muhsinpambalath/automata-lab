@@ -532,6 +532,33 @@ function Canvas({ automatonType }: CanvasProps) {
         setTransitionError('')
     }
 
+    const deleteState = (stateId: string) => {
+        setStates((currentStates) =>
+            currentStates.filter((state) => state.id !== stateId)
+        )
+
+        setTransitions((currentTransitions) =>
+            currentTransitions.filter(
+                (transition) =>
+                    transition.from !== stateId &&
+                    transition.to !== stateId
+            )
+        )
+
+        setSelectedState(null)
+        setConnectingFrom(null)
+        setConnectionTarget(null)
+        setEditingTransition(null)
+    }
+
+    const deleteTransition = (transitionId: string) => {
+        setTransitions((currentTransitions) =>
+            currentTransitions.filter(
+                (transition) => transition.id !== transitionId
+            )
+        )
+    }
+
     return (
         <div className="canvas">
             <div className="canvas-toolbar">
@@ -665,7 +692,16 @@ function Canvas({ automatonType }: CanvasProps) {
                                     y={labelY - 8}
                                     className="transition-label"
                                     textAnchor="middle"
-                                    style={{ pointerEvents: 'auto', cursor: 'context-menu' }}
+                                    style={{
+                                        pointerEvents: 'auto'
+                                    }}
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+
+                                        if (activeTool === 'delete') {
+                                            deleteTransition(transition.id)
+                                        }
+                                    }}
                                     onContextMenu={(event) => {
                                         event.preventDefault()
                                         event.stopPropagation()
@@ -705,6 +741,11 @@ function Canvas({ automatonType }: CanvasProps) {
                         }}
                         onClick={(event) => {
                             event.stopPropagation()
+
+                            if (activeTool === 'delete') {
+                                deleteState(state.id)
+                                return
+                            }
 
                             if (activeTool === 'select') {
                                 selectState(state.id)

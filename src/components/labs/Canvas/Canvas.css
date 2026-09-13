@@ -147,21 +147,36 @@
     cursor: grabbing;
 }
 
+.tool-add {
+    cursor: url('../../../assets/cursors/add-state.svg') 5 5, pointer;
+}
+
 .tool-add .state-node {
     cursor: not-allowed;
 }
 
-.tool-start .state-node,
-.tool-accept .state-node {
-    cursor: crosshair;
+.tool-start .state-node {
+    cursor: url('../../../assets/cursors/start-state.svg') 5 5, pointer;
 }
 
-.tool-delete .state-node {
-    cursor: not-allowed;
+.tool-accept .state-node {
+    cursor: url('../../../assets/cursors/final-state.svg') 5 5, pointer;
 }
 
 .tool-connect {
     cursor: default;
+}
+
+.tool-delete {
+    cursor: default;
+}
+
+.tool-delete .state-node {
+    cursor: url('../../../assets/cursors/delete-cursor.svg') 5 5, pointer;
+}
+
+.tool-delete .transition-label {
+    cursor: url('../../../assets/cursors/delete-cursor.svg') 5 5, pointer;
 }
 
 .tool-connect .state-node {
@@ -173,7 +188,7 @@
 }
 
 .canvas-area.tool-add {
-    cursor: crosshair;
+    cursor: url('../../../assets/cursors/add-state.svg') 5 5, crosshair;
 }
 
 .state-name-input {
