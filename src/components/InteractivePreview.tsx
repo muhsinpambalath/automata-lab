@@ -148,9 +148,8 @@ function InteractivePreview() {
                     </marker>
                 </defs>
 
-                {/* Start arrow */}
                 <line
-                    className="start-arrow"
+                    className="start-arrow-hero"
                     x1="120"
                     y1="100"
                     x2="150"
@@ -158,7 +157,6 @@ function InteractivePreview() {
                     markerEnd="url(#arrow)"
                 />
 
-                {/* q0 → q1 */}
                 <line
                     className={q0ToQ1Active ? 'active-transition' : ''}
                     x1="210"
@@ -168,7 +166,6 @@ function InteractivePreview() {
                     markerEnd="url(#arrow)"
                 />
 
-                {/* q0 loop */}
                 <path
                     className={q0LoopActive ? 'active-transition' : ''}
                     d="M 160 95 C 130 35, 230 35, 200 95"
@@ -178,7 +175,6 @@ function InteractivePreview() {
                     markerEnd="url(#arrow)"
                 />
 
-                {/* q1 loop */}
                 <path
                     className={q1LoopActive ? 'active-transition' : ''}
                     d="M 400 95 C 370 35, 470 35, 440 95"
@@ -188,13 +184,11 @@ function InteractivePreview() {
                     markerEnd="url(#arrow)"
                 />
 
-                {/* States */}
                 <circle cx="180" cy="120" r="30" />
 
                 <circle cx="420" cy="120" r="30" className={finalStateActive ? 'final-state-active' : ''} />
                 <circle cx="420" cy="120" r="26" className={finalStateActive ? 'final-state-active' : ''} />
 
-                {/* Labels */}
                 <text x="180" y="125" textAnchor="middle">q0</text>
                 <text x="420" y="125" textAnchor="middle">q1</text>
 

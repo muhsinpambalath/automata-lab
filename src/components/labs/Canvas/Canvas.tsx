@@ -1,4 +1,8 @@
-import { useState } from 'react'
+import {
+    useState,
+    type Dispatch,
+    type SetStateAction,
+} from 'react'
 import type {
     State,
     Transition,
@@ -15,6 +19,10 @@ import deleteIcon from '../../../assets/lab-icons/delete.svg'
 
 type CanvasProps = {
     automatonType: AutomatonType
+    states: State[]
+    setStates: Dispatch<SetStateAction<State[]>>
+    transitions: Transition[]
+    setTransitions: Dispatch<SetStateAction<Transition[]>>
 }
 
 type Point = {
@@ -111,16 +119,20 @@ const pathHitsState = (
 }
 
 
-function Canvas({ automatonType }: CanvasProps) {
+function Canvas({
+    automatonType,
+    states,
+    setStates,
+    transitions,
+    setTransitions,
+}: CanvasProps) {
 
     const MIN_STATE_DISTANCE = 70
     const [selectedState, setSelectedState] = useState<string | null>(null)
     const [activeTool, setActiveTool] = useState('select')
-    const [states, setStates] = useState<State[]>([])
     const [draggingState, setDraggingState] = useState<string | null>(null)
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
     const [editingState, setEditingState] = useState<string | null>(null)
-    const [transitions, setTransitions] = useState<Transition[]>([])
     const [connectingFrom, setConnectingFrom] = useState<string | null>(null)
     const [connectionTarget, setConnectionTarget] = useState<string | null>(null)
     const [transitionSymbols, setTransitionSymbols] = useState('')

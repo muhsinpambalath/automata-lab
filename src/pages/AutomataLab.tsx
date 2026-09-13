@@ -1,12 +1,19 @@
 import { useState } from 'react'
-import type { AutomatonType } from '../models/automaton'
+import type {
+    State,
+    Transition,
+    AutomatonType,
+} from '../models/automaton'
 import './AutomataLab.css'
 import Canvas from '../components/labs/Canvas/Canvas'
+import TransitionTable from '../components/labs/Transition Table/TransitionTable'
 
 
 
 function AutomataLab() {
 
+    const [states, setStates] = useState<State[]>([])
+    const [transitions, setTransitions] = useState<Transition[]>([])
     const [automatonType, setAutomatonType] = useState<AutomatonType>('DFA')
 
     return (
@@ -32,16 +39,26 @@ function AutomataLab() {
 
             <section className='lab-workspace'>
                 <div className='lab-canvas'>
-                    <Canvas automatonType = {automatonType} />
+                    <Canvas
+                        automatonType={automatonType}
+                        states={states}
+                        setStates={setStates}
+                        transitions={transitions}
+                        setTransitions={setTransitions}
+                    />
                 </div>
 
                 <aside className='lab-controls'>
                     <h2>Controls</h2>
                 </aside>
 
-                <section className='lab-table'>
-                    <h2>Transition Table</h2>
-                </section>
+                <div className="lab-table">
+                    <TransitionTable
+                        states={states}
+                        transitions={transitions}
+                        automatonType={automatonType}
+                    />
+                </div>
 
             </section>
         </main>

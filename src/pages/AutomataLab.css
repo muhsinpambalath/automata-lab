@@ -51,8 +51,13 @@
 
 .lab-table {
     grid-column: 1 / -1;
+
     padding: 24px;
+
     border-top: 1px solid #dfe3e8;
+
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .machine-selector {
