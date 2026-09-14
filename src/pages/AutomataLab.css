@@ -79,3 +79,170 @@
 .machine-selector:focus {
     border-color: #3157ff;
 }
+
+.simulation-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.simulation-section-label {
+    padding-bottom: 9px;
+    border-bottom: 1px solid #e6e9ee;
+
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #667085;
+}
+
+.simulation-controls label {
+    margin-top: 2px;
+
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #667085;
+}
+
+.simulation-input-row {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.simulation-input-row input {
+    flex: 1;
+    min-width: 0;
+    height: 38px;
+    padding: 0 11px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 6px;
+    outline: none;
+
+    background: #ffffff;
+
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: #111318;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.simulation-input-row input::placeholder {
+    color: #98a2b3;
+}
+
+.simulation-input-row input:focus {
+    border-color: #3157ff;
+    box-shadow: 0 0 0 3px rgba(49, 87, 255, 0.08);
+}
+
+.simulation-input-row input:disabled {
+    background: #f8f9fb;
+    color: #98a2b3;
+}
+
+.simulation-input-row button {
+    height: 38px;
+    padding: 0 14px;
+    width: 72px;
+
+    border: 1px solid #3157ffd5;
+    border-radius: 6px;
+
+    background: #3157ff;
+    color: #ffffff;
+
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease,
+        opacity 0.15s ease;
+}
+
+.simulation-input-row button:hover:not(:disabled) {
+    background: #2748d8;
+}
+
+.simulation-input-row button:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.simulation-input-row button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.simulation-status {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    margin-top: 8px;
+    padding: 11px 12px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 6px;
+
+    font-family: inherit;
+}
+
+.simulation-status strong {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+
+.simulation-status span {
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #667085;
+}
+
+.simulation-status code {
+    font-family: "Courier New", monospace;
+    color: #111318;
+}
+
+.simulation-status.idle {
+    background: #f8f9fb;
+}
+
+.simulation-status.accepted {
+    border-color: #b7e0c0;
+    background: #f4fbf5;
+}
+
+.simulation-status.accepted strong {
+    color: #26733a;
+}
+
+.simulation-status.rejected {
+    border-color: #e6d3a8;
+    background: #fffaf0;
+}
+
+.simulation-status.rejected strong {
+    color: #8a6416;
+}
+
+.simulation-status.invalid {
+    border-color: #e7b8b8;
+    background: #fff6f6;
+}
+
+.simulation-status.invalid strong {
+    color: #b42318;
+}

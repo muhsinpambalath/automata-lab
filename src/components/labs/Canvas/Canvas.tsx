@@ -23,6 +23,8 @@ type CanvasProps = {
     setStates: Dispatch<SetStateAction<State[]>>
     transitions: Transition[]
     setTransitions: Dispatch<SetStateAction<Transition[]>>
+    simulationTransition: string | null
+    simulationPulsing: boolean
 }
 
 type Point = {
@@ -125,6 +127,8 @@ function Canvas({
     setStates,
     transitions,
     setTransitions,
+    simulationTransition,
+    simulationPulsing,
 }: CanvasProps) {
 
     const MIN_STATE_DISTANCE = 70
@@ -680,7 +684,13 @@ function Canvas({
                             <g key={transition.id}>
                                 {route.control ? (
                                     <path
-                                        className="transition-line"
+                                        className={`transition-line ${
+                                            simulationPulsing &&
+                                            simulationTransition === transition.id
+                                                ? 'active-transition'
+                                                : ''
+                                        }`}
+
                                         d={`
                                             M ${route.start.x} ${route.start.y}
                                             Q ${route.control.x} ${route.control.y}
@@ -690,7 +700,13 @@ function Canvas({
                                     />
                                 ) : (
                                     <line
-                                        className="transition-line"
+                                        className={`transition-line ${
+                                            simulationPulsing &&
+                                            simulationTransition === transition.id
+                                                ? 'active-transition'
+                                                : ''
+                                        }`}
+
                                         x1={route.start.x}
                                         y1={route.start.y}
                                         x2={route.end.x}
@@ -702,7 +718,12 @@ function Canvas({
                                 <text
                                     x={labelX}
                                     y={labelY - 8}
-                                    className="transition-label"
+                                    className={`transition-label ${
+                                        simulationPulsing &&
+                                        simulationTransition === transition.id
+                                            ? 'active-transition-label'
+                                            : ''
+                                    }`}
                                     textAnchor="middle"
                                     style={{
                                         pointerEvents: 'auto'
